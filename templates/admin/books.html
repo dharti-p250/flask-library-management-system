@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Manage Books</h1>
+
+{% if add %}
+
+<div class="form-box">
+
+    <h2>Add New Book</h2>
+
+    <form method="POST" action="/admin/books/add">
+
+        <label>Book Title</label>
+        <input type="text" name="title" placeholder="Enter book title" required>
+
+        <label>Author</label>
+        <input type="text" name="author" placeholder="Enter author name" required>
+
+        <label>Category</label>
+        <input type="text" name="category" placeholder="Enter category">
+
+        <label>Quantity</label>
+        <input type="number" name="quantity" placeholder="Enter quantity" min="1" required>
+
+        <button type="submit">Add Book</button>
+
+    </form>
+
+</div>
+
+{% else %}
+
+<a class="button" href="/admin/books/add">
+    + Add Book
+</a>
+
+<br><br>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Category</th>
+    <th>Quantity</th>
+    <th>Available</th>
+    <th>Action</th>
+</tr>
+
+{% for book in books %}
+
+<tr>
+
+    <td>{{ book.id }}</td>
+
+    <td>{{ book.title }}</td>
+
+    <td>{{ book.author }}</td>
+
+    <td>{{ book.category }}</td>
+
+    <td>{{ book.quantity }}</td>
+
+    <td>{{ book.available }}</td>
+
+    <td>
+        <a href="/admin/books/delete/{{ book.id }}">
+            Delete
+        </a>
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endif %}
+
+{% endblock %}

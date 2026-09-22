@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="auth-icon">
+            🔐
+        </div>
+
+        <div class="auth-header">
+            <span class="auth-label">WELCOME BACK</span>
+            <h1>Sign In</h1>
+            <p>Sign in to access your library account.</p>
+        </div>
+
+        {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST" class="auth-form">
+
+            <div class="input-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <div class="input-wrapper">
+                    <span>✉</span>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <div class="input-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+                    <span>🔒</span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <button type="submit" class="auth-button">
+                Sign In
+                <span>→</span>
+            </button>
+
+        </form>
+
+        <div class="auth-footer">
+            <p>
+                Don't have an account?
+                <a href="/signup">Create Account</a>
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

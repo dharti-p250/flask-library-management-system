@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="books-page">
+
+    <div class="books-header">
+        <div>
+            <span class="page-label">LIBRARY COLLECTION</span>
+            <h1>Explore Books</h1>
+            <p>Find your next great book from our collection.</p>
+        </div>
+    </div>
+
+    <form action="/search" method="GET" class="modern-search">
+
+        <div class="search-input">
+            <span>🔍</span>
+
+            <input
+                type="text"
+                name="keyword"
+                placeholder="Search by title or author..."
+                value="{{ keyword or '' }}"
+            >
+        </div>
+
+        <button type="submit" class="search-button">
+            Search
+        </button>
+
+    </form>
+
+    <div class="books-count">
+        <span>Available Books</span>
+        <span class="count-badge">{{ books|length }}</span>
+    </div>
+
+    <div class="modern-book-grid">
+
+        {% for book in books %}
+
+        <div class="modern-book-card">
+
+            <div class="book-cover">
+                <span>📖</span>
+            </div>
+
+            <div class="book-content">
+
+                <span class="book-category">
+                    {{ book.category or "General" }}
+                </span>
+
+                <h2>{{ book.title }}</h2>
+
+                <p class="book-author">
+                    By {{ book.author }}
+                </p>
+
+                <div class="book-info">
+
+                    {% if book.available > 0 %}
+
+                    <span class="available">
+                        <span class="status-dot"></span>
+                        {{ book.available }} Available
+                    </span>
+
+                    {% else %}
+
+                    <span class="unavailable">
+                        <span class="status-dot"></span>
+                        Not Available
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="book-action">
+
+                    {% if book.available > 0 %}
+
+                    <a
+                        class="reserve-button"
+                        href="/reserve/{{ book.id }}"
+                    >
+                        Reserve Book
+                        <span>→</span>
+                    </a>
+
+                    {% else %}
+
+                    <button class="disabled-button" disabled>
+                        Currently Unavailable
+                    </button>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-books">
+
+            <div class="empty-icon">📚</div>
+
+            <h2>No Books Found</h2>
+
+            <p>
+                We couldn't find any books matching your search.
+            </p>
+
+            <a href="/books" class="button">
+                View All Books
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

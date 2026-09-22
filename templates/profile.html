@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="profile-page">
+
+    <div class="profile-header">
+
+        <div>
+            <span class="page-label">MY ACCOUNT</span>
+            <h1>My Profile</h1>
+            <p>View your account details and reserved books.</p>
+        </div>
+
+        <div class="profile-avatar">
+            {{ user.name[0]|upper }}
+        </div>
+
+    </div>
+
+
+    <div class="profile-card">
+
+        <div class="profile-card-top">
+
+            <div class="large-avatar">
+                {{ user.name[0]|upper }}
+            </div>
+
+            <div class="profile-name">
+                <h2>{{ user.name }}</h2>
+                <span>Library Member</span>
+            </div>
+
+        </div>
+
+
+        <div class="profile-details">
+
+            <div class="detail-box">
+
+                <span class="detail-icon">✉</span>
+
+                <div>
+                    <small>Email Address</small>
+                    <p>{{ user.email }}</p>
+                </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <span class="detail-icon">📝</span>
+
+                <div>
+                    <small>Bio</small>
+                    <p>{{ user.bio or "No bio available" }}</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="reservation-section">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="section-label">YOUR ACTIVITY</span>
+                <h2>My Reserved Books</h2>
+            </div>
+
+            <span class="reservation-count">
+                {{ reservations|length }} Books
+            </span>
+
+        </div>
+
+
+        <div class="reservation-table">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Book</th>
+                        <th>Author</th>
+                        <th>Reserved Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for item in reservations %}
+
+                    <tr>
+
+                        <td>
+                            <div class="book-name">
+                                <span class="mini-book">📖</span>
+                                <strong>{{ item.title }}</strong>
+                            </div>
+                        </td>
+
+                        <td>{{ item.author }}</td>
+
+                        <td>
+                            <span class="date-badge">
+                                {{ item.reserved_at }}
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="3">
+
+                            <div class="no-reservations">
+
+                                <div class="empty-icon">
+                                    📚
+                                </div>
+
+                                <h3>No Reserved Books</h3>
+
+                                <p>
+                                    You haven't reserved any books yet.
+                                </p>
+
+                                <a href="/books" class="button">
+                                    Explore Books
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="admin-header">
+    <div>
+        <p class="admin-label">ADMIN PANEL</p>
+        <h1>Dashboard</h1>
+        <p class="admin-subtitle">Manage your library from one place.</p>
+    </div>
+
+    <a class="admin-logout" href="/admin/logout">
+        Logout
+    </a>
+</div>
+
+<div class="admin-stats">
+
+    <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div>
+            <p>Total Books</p>
+            <h2>{{ total_books }}</h2>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div>
+            <p>Total Users</p>
+            <h2>{{ total_users }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<div class="admin-section">
+
+    <div>
+        <p class="section-label">LIBRARY MANAGEMENT</p>
+        <h2>Manage your library</h2>
+        <p>
+            Add new books, view available books and manage
+            your library collection.
+        </p>
+    </div>
+
+    <a class="manage-button" href="/admin/books">
+        Manage Books →
+    </a>
+
+</div>
+
+{% endblock %}

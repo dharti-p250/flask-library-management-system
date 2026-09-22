@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="hero">
+
+    <h1>Welcome to Library Management System</h1>
+
+    <p>
+        Manage books, users and reservations easily.
+    </p>
+
+    <a class="button" href="/books">
+        Explore Books
+    </a>
+
+</div>
+
+<h2>Available Books</h2>
+
+<div class="book-grid">
+
+{% for book in books %}
+
+    <div class="book-card">
+
+        <h3>{{ book.title }}</h3>
+
+        <p>
+            <strong>Author:</strong>
+            {{ book.author }}
+        </p>
+
+        <p>
+            <strong>Category:</strong>
+            {{ book.category }}
+        </p>
+
+        <p>
+            Available:
+            {{ book.available }}
+        </p>
+
+        <a
+            class="button"
+            href="/reserve/{{ book.id }}"
+        >
+            Reserve
+        </a>
+
+    </div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
